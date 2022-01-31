@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    height: 360px;
+    flex: 0 0 360px;
+    margin: 10px;
+
+
+}
+
+
+
+.fab-button{
+    position: fixed;
+    right: 32px;
+    bottom: 96px;
+    z-index:998;
+}

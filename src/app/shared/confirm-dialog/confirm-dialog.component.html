@@ -1,0 +1,12 @@
+<form>
+    <h3 mat-dialog-title>{{title}}</h3>
+    <div mat-dialog-content>
+        {{content}}
+    </div>
+    <div mat-dialog-actions>
+        <button type="button" mat-raised-button color="primary" (click)='onClick(true)'>Confirm</button>
+        <button type="button" mat-dialog-close mat-button (click)='onClick(false)' >Cancel</button>
+    </div>
+    </form>
+    
+      

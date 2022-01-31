@@ -1,0 +1,42 @@
+// 使用系统预定义的颜色变量和 mixin 为自定义主题创建“调色盘”
+// 所有可用的颜色可以在此查看: https://material.io/design/color/
+$custom-app-primary: mat-palette($mat-indigo);
+
+// 针对每个调色盘，可选的，可以指定“default”，“lighter”，“darker”，“text”的色调，方便后续取用
+// 通常推荐默认为500，更亮为100，更暗为700
+$custom-app-accent: mat-palette($mat-pink, A500, A100, A700, A900);
+
+// 警告色是可以选的（默认是红色 $mat-red）
+$custom-app-warn: mat-palette($mat-orange);
+
+// 创建明亮风格的主题颜色配置对象
+$candy-app-theme: mat-light-theme((
+  color: (
+    primary: $custom-app-primary,
+    accent: $custom-app-accent,
+    warn: $custom-app-warn,  
+  )
+));
+
+
+$dark-theme:   mat-dark-theme((
+  color: (
+    primary: $custom-app-primary,
+    accent: $custom-app-accent,
+  )
+));
+
+// 用一个类名包裹暗黑主题样式
+.unicorn-dark-theme {
+  @include angular-material-color($dark-theme);
+};
+
+
+
+// 这里定义文字排版对象，自定义了字体、headline、body-1.
+$custom-typography: mat-typography-config(
+  $font-family: 'monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+
+);

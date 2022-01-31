@@ -7,10 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider'
 import {MatSidenavModule} from '@angular/material/sidenav'
 import { SharedModule } from './shared/shared.module';
+import { LoginModule } from './login/login.module';
+import { ProjectModule } from './project/project.module';
+import { TaskModule } from './task/task.module';
+import { demo } from './utils/inject_demo';
+import './utils/debug.util'
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    
 
 
   ],
@@ -21,12 +28,14 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     MatSliderModule,
     MatSidenavModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule,
+    LoginModule,
+    ProjectModule,
+    TaskModule,
   
-    
-
   ],
-  providers: [],
+  providers: [demo],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

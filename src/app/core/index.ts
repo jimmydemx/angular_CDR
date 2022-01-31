@@ -8,6 +8,11 @@ import {MatIconRegistry} from '@angular/material/icon';
 import{DomSanitizer} from '@angular/platform-browser'
 import { loadSvgResources } from '../utils/svg.util';
 import { SharedModule } from '../shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http';
+import { CoreRoutingModule } from './core-routing.module';
+
+
 
 
 @NgModule({
@@ -19,7 +24,11 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule, 
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    CoreRoutingModule
+
 
   ],
   exports:[

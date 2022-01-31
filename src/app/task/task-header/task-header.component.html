@@ -1,0 +1,32 @@
+<div mat-subheader class="header-container">
+    <div>
+        <h3 style="margin-bottom: 0px; font-weight: 600;">{{header}}</h3>
+    </div>
+    <div class="fill">
+        <button mat-button (click)="onClickNewTask()">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>new task</span>
+        </button>
+    </div>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+    </div>
+</div>
+
+
+<mat-menu #menu = 'matMenu'>
+    <button mat-menu-item (click)="onEditListClick()">
+        <mat-icon>mode_edit</mat-icon>
+        <span>change list name</span>
+    </button>
+    <button mat-menu-item (click)="OnClicktoMove()">
+        <mat-icon [svgIcon]="'move'"></mat-icon>
+        <span>move list item</span>
+    </button>
+    <button (click)="onDelListClick()" mat-menu-item>
+        <mat-icon>delete_forever</mat-icon>
+        <span>delete list</span>
+    </button>
+</mat-menu>

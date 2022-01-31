@@ -1,0 +1,35 @@
+<form  [formGroup]="form" (ngSubmit)="onSubmit(form, $event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Register:</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field class='full-width'>
+                <input matInput type='text' placeholder="you email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field class='full-width'>
+                <input matInput type='text' placeholder="Name" formControlName='name'>
+            </mat-form-field>
+            <mat-form-field class='full-width'>
+                <input matInput type="password" placeholder="your password" formControlName='password'>
+            </mat-form-field>
+            <mat-form-field class='full-width'>
+                <input matInput type="password" placeholder="password again" formControlName='repeat'>
+            </mat-form-field>
+            <app-image-list-select
+                [useSvgIcon]= "true"
+                [col]="6"
+                [title] = "'select Images'"
+                [items]= "items"
+                formControlName="avatar">
+            </app-image-list-select>
+                <button type="button" color="primary" mat-mini-fab type='submit'>Register</button>
+        </mat-card-content>
+        <mat-card-actions>
+            <p class="text-right">Not a member? <a href="">Log up</a></p>
+            <p class="text-right">Fogot password? <a href="">Reset</a></p>
+        </mat-card-actions>
+    </mat-card>
+
+</form>    
+

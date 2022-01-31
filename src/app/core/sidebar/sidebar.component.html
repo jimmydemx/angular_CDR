@@ -1,1 +1,24 @@
-<p>sidebar works!</p>
+<mat-nav-list>
+    <h3 mat-subheader>Project</h3>
+    <mat-list-item [routerLink]="['projects']" (click) = 'onNavClick()'>
+        <mat-icon mat-list-icon >view_module</mat-icon>
+        <span mat-line>Home</span>
+        <span mat-line mat-subheader>Check all projects</span>
+    </mat-list-item>
+    <h3 mat-subheader>Calendar</h3>
+    <mat-list-item [routerLink]="['tasklists']" (click) = 'onNavClick()'>
+        <mat-icon mat-list-icon svgIcon="month"></mat-icon>
+        <span  mat-line>Monthly</span>
+        <span mat-line >display by month</span>
+    </mat-list-item>
+    <mat-list-item>
+        <mat-icon mat-list-icon>date_range</mat-icon>
+        <span>Weekly</span>
+    </mat-list-item>
+    <mat-list-item>
+        <mat-icon mat-list-icon>today</mat-icon>
+        <span>daily</span>
+    </mat-list-item>
+
+
+</mat-nav-list>

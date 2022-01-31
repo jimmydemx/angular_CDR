@@ -1,0 +1,18 @@
+<form #f='ngForm' (ngSubmit)='onSubmit(f,$event)'>
+
+    <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="fast create a task"  [(ngModel)]="desc" name="desc">
+        <button matSuffix mat-icon-button type='submit'><mat-icon>send</mat-icon></button>
+        <mat-error>cant be empty</mat-error>
+    </mat-form-field>
+</form>
+
+
+<div>
+    表单数据：{{f.value | json}}
+</div>
+
+<div>
+    validation{{f.valid | json}}
+</div>
+

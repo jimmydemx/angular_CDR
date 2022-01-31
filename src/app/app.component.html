@@ -1,19 +1,23 @@
 
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="push" position='start'>
-    <app-sidebar></app-sidebar>
+<mat-sidenav-container [class.unicorn-dark-theme]="darkTheme">
+  <mat-sidenav #sidenav mode="over" position='start'>
+    <app-sidebar  (navClick)="sidenav.toggle()"></app-sidebar>
   </mat-sidenav>
   <div class="site">
     <header >
-      <app-header (toggle)="sidenav.toggle()"></app-header>
+      <app-header (toggle)="sidenav.toggle()" (toggleDarkTheme)="switchTheme($event)"></app-header>
     </header>
     <main>
       <!-- <button (click)='sidenav.open()'>Open Siderbar
       </button> -->
-      <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+      <router-outlet></router-outlet>
+
+
+      <!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider> -->
     </main>
     <footer>
-      <app-footer></app-footer>
+      <app-footer>
+      </app-footer>
     </footer>
   </div>
 </mat-sidenav-container>

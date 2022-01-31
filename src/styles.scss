@@ -1,3 +1,13 @@
+@import '~@angular/material/theming'; 
+@import './theme/_custom-theme-config';
+
+// 传入文字排版配置，注意这个 mixin 只能导入一次
+@include mat-core($custom-typography); 
+
+// 传入配置，生成颜色主题样式
+@include angular-material-theme($candy-app-theme);
+
+
 /* You can add global styles to this file, and also import other style files */
 html, body, app-root, mat-sidenav-container, .site {
     width: 100%;
@@ -20,5 +30,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fill-remianing-space{
     flex:1 1 auto;
 
+}
+
+.full-width{
+    width: 100%;
+}
+
+.square {
+
+    width: 100px;
+    height: 100px;
+    background-color: black;
 
 }

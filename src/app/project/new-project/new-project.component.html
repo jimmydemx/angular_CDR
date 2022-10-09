@@ -2,14 +2,22 @@
     <h2 mat-dialog-title>{{title}}</h2>
     <div mat-dialog-content>
         <mat-form-field class='full-width'>
-            <input matInput type="text" placeholder="Project Name" >
+            <input matInput type="text" placeholder="Project Name" [(ngModel)]="name" #nameControl="ngModel" [ngModelOptions]="{standalone: true}">
+            <mat-error *ngIf="!!getNameErrors()">{{getNameErrors()}}</mat-error>
         </mat-form-field>
         <mat-form-field class='full-width'>
-            <input matInput type="text" placeholder="Project  Description" >
+            <input matInput type="text" placeholder="Project  Description" [(ngModel)]="desc"  #descControl="ngModel" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
+        <app-image-list-select
+            [useSvgIcon]= "false"
+            [cols]='6'
+            [title]="'select backgroud'"
+            [items]='coverImgs'
+            [formControl]='coverImg'>
+        </app-image-list-select>
     </div>
     <div mat-dialog-actions>
-        <button type="button" mat-raised-button color="primary" (click)="onClick()">Save</button>
+        <button type="button" mat-raised-button color="primary"  [disabled]="getGlobalValidation()" (click)="onClick()">Save</button>
         <button type="button" mat-button mat-dialog-close>close</button>
     </div>
 </form>

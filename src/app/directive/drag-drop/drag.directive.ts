@@ -6,7 +6,6 @@ import { DragDropService } from '../drag-drop.service';
   selector: '[appDrag][dragTag][dragData][draggedClass]'
 })
 export class DragDirective {
-
   private _isDraggble = false;
 
   // 在dom中使用 app-draggable= 'true' 就只直接调用了 set isDraggable(val)方法，this._isDraggble = true

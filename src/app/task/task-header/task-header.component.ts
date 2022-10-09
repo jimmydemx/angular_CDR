@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class TaskHeaderComponent implements OnInit {
 
-  @Input() header:string='';
+  @Input() header:any='';
   @Output() createNewTask: EventEmitter<void> = new EventEmitter<void>();
   @Output() moveAll : EventEmitter<void> = new EventEmitter<void>(); 
   @Output() delList : EventEmitter<void> = new EventEmitter<void>(); 

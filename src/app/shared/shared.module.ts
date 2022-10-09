@@ -23,11 +23,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServicesModule } from '../services/services.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { AgeModulesComponent } from './age-modules/age-modules.component';
+import { IdentityInputComponent } from './identity-input/identity-input.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { ChipsListComponent } from './chips-list/chips-list.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AreaListComponent } from './area-list/area-list.component';
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    AgeModulesComponent,
+    IdentityInputComponent,
+    ChipsListComponent,
+    AreaListComponent,
+
   ],
   imports: [
     CommonModule,
@@ -47,10 +59,14 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
     DirectiveModule,
     ReactiveFormsModule,
     FormsModule,
-    ServicesModule
+    ServicesModule,
+    MatButtonToggleModule,
+    MatChipsModule
+    
 
 
   ],
@@ -74,14 +90,21 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
+    MatChipsModule,
     ConfirmDialogComponent,
     DirectiveModule,
     ReactiveFormsModule,
     FormsModule,
     ServicesModule,
-    ImageListSelectComponent
+    ImageListSelectComponent,
+    MatButtonToggleModule,
+    AgeModulesComponent,
+    ChipsListComponent,
+    IdentityInputComponent,
+    AreaListComponent
     
   ],
-  entryComponents:[ConfirmDialogComponent]
+  entryComponents:[ConfirmDialogComponent, ImageListSelectComponent]
 })
 export class SharedModule { }

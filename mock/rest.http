@@ -1,0 +1,39 @@
+GET http://localhost:3000/projects
+
+
+###
+
+POST http://localhost:3000/tasklists
+Content-Type:  application/json
+
+{
+"name":"list1",
+"order":1,
+"projectId":"1"
+}
+
+### 
+
+PATCH http://localhost:3000/tasklists/4
+Content-Type:  application/json
+
+{
+"name":"list2",
+"order":1,
+"projectId":"1"
+}
+
+###
+DELETE  http://localhost:3000/tasklists/4
+
+###
+
+GET http://localhost:3000/spain?admin_name=Madrid
+
+### 
+GET http://localhost:3000/spain/
+
+
+###
+GET http://localhost:3000/projects?members_like=2
+

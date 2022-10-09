@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output,HostBinding, HostListener} from '@angular/core';
+import { Router } from '@angular/router';
 import { cardAnim } from 'src/app/animation/card.anim';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 @Component({
@@ -31,9 +33,11 @@ export class ProjectItemComponent implements OnInit {
     this.cardState='out';
 
   }
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+    // console.log("input",this.item);
+    
   }
 
   onInviteClick(){
@@ -41,14 +45,28 @@ export class ProjectItemComponent implements OnInit {
   }
 
   onEditClick(){
+
+  
     console.log("onEditClick");
     
-    this.onEdit.emit();
+    this.onEdit.emit(this.item);
 
   }
   onDeleteClick(){
+    console.log(this.item)
+
+    // this.ProjectService.del
     console.log("onDeleteClick");
-    this.onDelte.emit(null);
+    this.onDelte.emit(this.item);
+
+  }
+
+  //[routerLink]="['../','task',item.id]" 
+
+  onClickImage(){
+    this.router.navigateByUrl('task/'+this.item.id, {state:this.item})
+    
+    // (['../','task',this.item.id],{state:this.item})
 
   }
 }

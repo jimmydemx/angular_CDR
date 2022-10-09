@@ -10,5 +10,5 @@ export const LOGIN_FAIL = createAction('[Auth] LOGIN_FAIL',props<String>());
 export const REGISTER = createAction('[Auth] REGISTER', props<User>());
 export const REGISTER_SUCCESS = createAction('[Auth] REGISTER_SUCCESS', props<Auth>());
 export const REGISTER_FAIL = createAction('[Auth] REGISTER_FAIL', props<String>());
-export const LOGOUT = createAction('[Auth] LOGOUT', props<Auth>());
+export const LOGOUT = createAction('[Auth] LOGOUT');
 export const LOG_NAVIGATE = createAction('[Auth] LOG_NAVIGATE');

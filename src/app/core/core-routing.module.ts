@@ -4,7 +4,6 @@ import { ProjectListComponent } from '../project/project-list/project-list.compo
 import { TaskHomeComponent } from '../task/task-home/task-home.component';
 
 
-
 const routes: Routes = [
     {path:'projects', component: ProjectListComponent },
     {path:'tasklists', component:   TaskHomeComponent}

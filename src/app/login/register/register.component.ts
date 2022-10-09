@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup } from '@angular/forms';
+import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/domain';
+import { REGISTER } from 'src/app/store/actions/auth.action';
 
 
 @Component({
@@ -9,12 +12,12 @@ import { FormBuilder,FormGroup } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-
+  selectedIndex!:number
   form!: FormGroup;
   items: string[] = [];
-  private readonly avatarName=' avatars';
+  private readonly avatarName='avatars';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private store$: Store<User>) { }
 
   ngOnInit(): void {
 
@@ -24,21 +27,62 @@ export class RegisterComponent implements OnInit {
     this.items=nums.map(item=>{
       return `avatars:svg-${item}`
     })
+
+
     this.form = this.fb.group({
-      email:[],
-      name:[],
-      password:[],
-      repeat:[],
-      avatar:[]
+      email:['',Validators.compose([Validators.required, Validators.email])],
+      name:['', Validators.compose([Validators.required])],
+      password:['',Validators.compose([Validators.minLength(6)])],
+      repeat:['',Validators.compose([Validators.minLength(6)])],
+      avatar:[img],
+      age:['',Validators.compose([Validators.required])],
+      // idInfo: new FormControl({idType: idType})
+      idInfo: [{idType:'',idNum: ''},Validators.compose([Validators.required])],
+      location:[{country:'',province:'',city:'',street:''},Validators.compose([Validators.required])]
+
     })
+
+    // idInfo: ({
+    //   idType:new FormControl('',Validators.compose([Validators.required])),
+    //   idNum: new FormControl('',Validators.compose([Validators.required]))
+    // }),
+
+    // location: new FormGroup({
+    //   country: new FormControl('',Validators.compose([Validators.required])),
+    //   province:new FormControl('',Validators.compose([Validators.required])),
+    //   city:new FormControl('',Validators.compose([Validators.required])),
+    //   street: new FormControl('',Validators.compose([Validators.required])),
+    // })
+
+    this.form.get('idInfo')?.valueChanges.subscribe(val=>console.log('fwefwef',val))
+    this.form.valueChanges.subscribe(val=>console.log('entire form',val))
   }
 
 
   onSubmit(form:any, event:any){
     event.preventDefault();
-      console.log(JSON.stringify(form.value));
-      console.log(form.valid);
-     // this.form.controls['email'].setValidators(this.validate);
+    this.store$.dispatch(REGISTER(this.form?.value))
+
+    if(!form.valid){
+        return;
+    }
+    console.log(form.value);
   }
 
+  onChange($e:any){
+
+
+  }
+  onClickNext(){
+   if(this.form.invalid){
+    
+
+   }else{
+
+
+    this.selectedIndex =1
+   }
+
+
+  }
 }

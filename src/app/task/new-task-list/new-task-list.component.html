@@ -2,7 +2,8 @@
     <h3 mat-dialog-title>{{title}}</h3>
     <div mat-dialog-content>
         <mat-form-field>
-          <input type="text" matInput placeholder="List Name">
+          <input type="text" matInput placeholder="List Name" [(ngModel)]="ProjectTitle" [ngModelOptions]="{standalone: true}" #input="ngModel" >
+          <mat-error>{{title$?.errors| json}}</mat-error>
         </mat-form-field>
     </div>
     <div mat-dialog-actions>

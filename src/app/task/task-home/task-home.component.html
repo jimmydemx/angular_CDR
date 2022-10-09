@@ -10,19 +10,19 @@
     [dragData] ="'taskList'"
     [draggedClass]="'drag-start'"
     (dropped)="handleMove($event, list)"
-    [ngStyle]="{'order':list.order}"
-    *ngFor="let list of lists">
+    [ngStyle]="{'order':list?.order}"
+    *ngFor="let list of tasklist$ |async">
         <app-task-header  (moveAll)="launchCopyTaskDialog()"
         (createNewTask)='launchNewTaskDialog()' 
-        (delList) ='launchConfirmDialog()'
-        (editList)="launchEditListDialog()"
-        [header]="list.name"></app-task-header>
+        (delList)='launchConfirmDialog(list)'
+        (editList)="launchEditListDialog(list)"
+        [header]="list?.name"></app-task-header>
         <app-quick-task></app-quick-task>
-        <app-task-item *ngFor="let task of list.tasks" 
+        <!-- <app-task-item *ngFor="let task of list.tasks" 
         class="task-items"  
         (taskClick)="launchUpdateTaskDialog(task)"
         [item]="task">
-        </app-task-item>
+        </app-task-item> -->
     </app-task-list>
 </div>
 

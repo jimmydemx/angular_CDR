@@ -1,7 +1,15 @@
 import { Component, Renderer2, OnInit, QueryList, ViewChildren,HostBinding } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { result } from 'lodash';
+import { map, Observable, take } from 'rxjs';
 import { routeAnim } from 'src/app/animation/route.anim';
+import { Project, taskList } from 'src/app/domain';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { getTaskLists, getTaskListsOrder, RootState } from 'src/app/store';
+import { TASKLIST_ADD, TASKLIST_DELETE, TASKLIST_LOAD, TASKLIST_UPDATE } from 'src/app/store/actions/task-list.action';
+import { taskListsState } from 'src/app/store/reducers/task-list.reducer';
 import { comps } from 'src/app/utils/comps';
 import { CopyTaskComponent } from '../copy-task/copy-task.component';
 import { NewTaskListComponent } from '../new-task-list/new-task-list.component';
@@ -103,11 +111,36 @@ export class TaskHomeComponent implements OnInit {
       ]
     }
   ]
+  project!:Project | undefined
 
-  constructor(rd2:Renderer2,private mdialog: MatDialog) { }
+  tasklist$!:  Observable<taskList[] | undefined>
+
+  constructor(rd2:Renderer2,private mdialog: MatDialog, private store$:Store<RootState>,private router:Router, private rou: ActivatedRoute) { 
+  if(this.router.getCurrentNavigation()?.extras.state){
+    this.project = this.router.getCurrentNavigation()?.extras?.state as Project
+  }
+
+  if(this.project){
+    this.store$.dispatch(TASKLIST_LOAD(this.project))
+  }
+  this.tasklist$ = this.store$.select(getTaskLists)
+  
+  
+  }
 
   ngOnInit(): void {
 
+    // router 传递的值
+    var reg =/.*\/(.*)/
+    var string;
+    if(this.router.url.match(reg) ){
+    string =this.router.url.match(reg)
+    }
+    //string?.[1]
+  //  this.tasklist$ = this.store$.select(TASKLIST_LOAD(string?.[1]))
+    console.log("private rotuer", this.router.getCurrentNavigation()?.extras.state);
+    
+    
   }
 
   ngAfterViewInit(){
@@ -126,7 +159,13 @@ export class TaskHomeComponent implements OnInit {
   launchNewTaskDialog(){
 
     console.log("q23424");
-     this.mdialog.open(NewTaskComponent,{data:{title:"New Task"}});
+    const dialogRef = this.mdialog.open(NewTaskComponent,{data:{title:"New Task"}});
+
+     dialogRef.afterClosed().subscribe(result=>{
+
+           })
+
+
   }
 
 
@@ -140,18 +179,63 @@ export class TaskHomeComponent implements OnInit {
     this.mdialog.open(NewTaskComponent,{data:{title: "Edit Task", task: task}})
 
   }
-  launchConfirmDialog(){
+  launchConfirmDialog(list:taskList){
     const dialogRef = this.mdialog.open(ConfirmDialogComponent, {data:{title: "Confirm", content:"Delete the task"}})
-    dialogRef.afterClosed().subscribe(result=>console.log(result))
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result){
+        this.store$.dispatch(TASKLIST_DELETE(list))
+      }
+
+    })
   }
-  launchEditListDialog(){
+  launchEditListDialog(list:taskList){
     const dialogRef = this.mdialog.open(NewTaskListComponent, {data:{title: "Update task List"}})
-    dialogRef.afterClosed().subscribe(result=>console.log(result))
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result){
+        console.log(list);
+        var list_c = {...list}
+        list_c.name = result;
+        this.store$.dispatch(TASKLIST_UPDATE(list_c))
+      }
+     
+      })
   }
 
   launchNewListDialog(){
-    const dialogRef = this.mdialog.open(NewTaskListComponent, {data:{title: "Create task List"}})
-    dialogRef.afterClosed().subscribe(result=>console.log(result))
+    const dialogRef = this.mdialog.open(NewTaskListComponent, {data:{title: "Create New Task List"}})
+    dialogRef.afterClosed().subscribe(result=>{
+      debugger;
+      // create a tasklist 
+      var a =this.project?.id
+      var thisorder:number=0
+      this.store$.select(getTaskListsOrder).pipe(take(1)).subscribe(order=>{
+        if(order){
+         thisorder = Math.max(...order)+1
+        }else{
+          thisorder =1
+        }
+      });
+      
+    
+      var taskList :taskList ={
+        id: null,
+        name: result,
+        order:thisorder,
+        ...this.project?.id&&{projectId:this.project?.id},
+        taskIds:[]
+      }
+      console.log("tasklIst",taskList);
+      
+      if(result){
+        this.store$.dispatch(TASKLIST_ADD(taskList))
+      }
+
+
+
+
+
+      
+    })
 
   }
 

@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { QuoteSevice } from './quote.service';
+import { ProjectService } from './project.service';
+import {  QuoteSevice } from './quote.service';
 
 
 
@@ -9,7 +10,7 @@ export class ServicesModule {
 
         return {
           ngModule: ServicesModule,
-          providers:[QuoteSevice]
+          providers:[QuoteSevice, ProjectService]
         }
     }
 }

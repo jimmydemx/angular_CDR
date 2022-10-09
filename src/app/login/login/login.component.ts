@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
     this.form = this.fb.group({
-        email: ['j_demx@yahoo.com', Validators.compose([Validators.required,Validators.email,this.validate])],
-        password: ['', Validators.required]
+        email: ['wpcfan@163.com', Validators.compose([Validators.required,Validators.email,this.validate])],
+        password: ['wp123456', Validators.required]
 
     })
     // console.log(this.quote)
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
     if(!c.value){
       return {null:null};
     }
-    const pattern =/^j.*$/;
+    const pattern =/^[a-z].*$/;
       if(pattern.test(c.value)){
         console.log(c.value);
         return null;

@@ -27,11 +27,11 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>Everyday Words:</mat-card-title>
-            <mat-card-subtitle>{{quote.cn}}</mat-card-subtitle>
+            <mat-card-subtitle>{{(quote$ |async)?.quote?.cn}}</mat-card-subtitle>
         </mat-card-header>
-            <img  mat-card-image [src]="quote.pic" alt="quotes">
+            <img  mat-card-image [src]="(quote$ |async)?.quote?.pic" alt="quotes">
         <mat-card-content>
-           {{ quote.en}}
+           {{(quote$ |async)?.quote?.en}}
         </mat-card-content>
 
     </mat-card>
